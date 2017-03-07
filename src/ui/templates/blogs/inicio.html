@@ -1,0 +1,91 @@
+{% extends 'blogs/base.html' %}
+{% load static %}
+{% block metas %}
+{{ block.super }}
+<title>Fistrium - Inicio</title>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container" style="padding-top:50px">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 ">
+                <div class="panel articulo">
+                    <div class="panel-image embed-responsive ">
+                        <video class="embed-responsive-item" controls>
+                            <source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            <source src="http://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                    <div class="panel-autor">
+                        <img class="img-responsive" src="{% static 'dist/img/no-user-30px.png' %}">
+                        <div>
+                            Manolito
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                    <div class="panel-header">
+                        <span><a href="#">Heading Heading Heading</a></span>
+                    </div>
+                    <div class="panel-body">
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo...</p>
+                        <p><a href="#">Leer más...</a></p>
+                        <div class="comment-like-box">
+                            <a href="#" class="pull-left">Ver comentarios (10)</a>
+                            <span class="pull-right comment-like" data-nombre="dos"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% for post in post_objects %}
+            <div class="col-lg-3 col-md-4 col-sm-6 ">
+                <div class="panel articulo">
+                    <div class="panel-image">
+                        <a href="#">
+                            <img class="img-responsive imagen-articulo" src="{% static 'dist/img/ds-1140px.png' %}" srcset="{% static 'dist/img/ds-384px.png' %} 1140w, {% static 'dist/img/ds-940px.png' %} 940w, {% static 'dist/img/ds-720px.png' %} 720w, {% static 'dist/img/ds-384px.png' %} 384w" />
+                        </a>
+                    </div>
+                    <div class="panel-autor">
+                        <img class="img-responsive" src="{% static 'dist/img/no-user-30px.png' %}">
+                        <div>
+                            {{ post.owner.owner.mail }}
+                        </div>
+                        <div class="">
+                            {{ post.created_at }}
+                        </div>
+                    </div>
+                    <div class="panel-header">
+                        <span><a href="#">{{ post.titulo }}</a></span>
+                    </div>
+                    <div class="panel-body">
+                        {{ post.introduccion }}
+                        <p><a href="#">Leer más...</a></p>
+                        <div class="comment-like-box">
+                            <a href="#" class="pull-left">Ver comentarios (10)</a>
+                            <span class="pull-right comment-like" data-nombre="dos"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> <!-- /container -->
+</main>
+{% endblock %}

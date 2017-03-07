@@ -1,0 +1,15 @@
+{% extends 'blogs/base.html' %}
+
+{% block metas %}
+{{ block.super }}
+<title>Fistrium - Blogs</title>
+{% endblock %}
+
+{% block content %}
+listado de blogs de la plataforma
+<ul>
+    {% for blog in blog_objects %}
+    <li>{{ blog.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

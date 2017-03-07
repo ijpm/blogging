@@ -1,0 +1,20 @@
+{% extends 'blogs/base.html' %}
+
+{% block metas %}
+{{ block.super }}
+<title>Fistrium - Inicio</title>
+{% endblock %}
+
+{% block content %}
+<h2>New post</h2>
+{% autoescape off %}
+    <div>{{ message }}</div>
+{% endautoescape %}
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_table }}
+    <div>
+        <button>Submit</button>
+    </div>
+</form>
+{% endblock %}
