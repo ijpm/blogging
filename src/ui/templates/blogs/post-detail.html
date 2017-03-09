@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block metas %}
+{{ block.super }}
+<title>Fistrium - Post detail</title>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container" style="padding-top:50px">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-12">
+                titulo: {{post.titulo}}
+                <br>
+                fecha de publicacion {{ post.publish_at }}
+                <br>
+                descripcion: {{ post.introduccion }}
+                <br>
+                cuerpo {{ post.cuerpo }}
+                <br>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

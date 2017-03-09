@@ -1,25 +1,18 @@
 {% extends 'base.html' %}
 
-{% block metas %}
-{{ block.super }}
-<title>Fistrium - New Post</title>
-{% endblock %}
-
 {% block content %}
 <main>
     <div class="container" style="padding-top:50px">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-12">
-                <h2>New post</h2>
-                {% autoescape off %}
-                    <div>{{ message }}</div>
-                {% endautoescape %}
-                <form method="post" novalidate>
+               <h2>Login</h2>
+                <div style="color:red">{{error}}</div>
+                <form  method="post" novalidate>
                     {% csrf_token %}
-                    {{ form.as_p }}
+                   {{ form.as_p }}
                     <div>
-                        <button>Submit</button>
+                        <button>Login</button>
                     </div>
                 </form>
             </div>
