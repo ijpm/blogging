@@ -34,6 +34,7 @@
                         </ul>
                     </li>
                      {% if user.is_authenticated %}
+                            <li><a href="{% url 'new_post' %}">Nuevo Post</a></li>
                             <li><a href="{% url 'login' %}">Mis Blogs</a></li>
                             <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}

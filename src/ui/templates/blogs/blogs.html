@@ -6,10 +6,20 @@
 {% endblock %}
 
 {% block content %}
-listado de blogs de la plataforma
-<ul>
-    {% for blog in blog_objects %}
-    <li>{{ blog.name }}</li>
-    {% endfor %}
-</ul>
+<main>
+    <div class="container" style="padding-top:50px">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-12">
+               <h1>listado de blogs de la plataforma</h1>
+                <ul>
+                    {% for blog in blog_objects %}
+                    <li>{{ blog.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
 {% endblock %}

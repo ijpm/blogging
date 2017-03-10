@@ -13,7 +13,7 @@
             <div class="col-md-12">
                 <h2>New post</h2>
                 {% autoescape off %}
-                    <div>{{ message }}</div>
+                    <div>{{ msg }}</div>
                 {% endautoescape %}
                 <form method="post" novalidate>
                     {% csrf_token %}
