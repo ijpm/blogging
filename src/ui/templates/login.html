@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load bootstrap3 %}
 {% block content %}
 <main>
     <div class="container" style="padding-top:50px">
@@ -10,10 +10,12 @@
                 <div style="color:red">{{error}}</div>
                 <form  method="post" novalidate>
                     {% csrf_token %}
-                   {{ form.as_p }}
-                    <div>
-                        <button>Login</button>
-                    </div>
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                            Login
+                        </button>
+                    {% endbuttons %}
                 </form>
             </div>
         </div>

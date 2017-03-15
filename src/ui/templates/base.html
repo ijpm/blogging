@@ -22,7 +22,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav menu">
-                    <li class="active2"><a href="./index.html">Inicio</a></li>
+                    <li class="active2"><a href="{% url 'home' %}">Inicio</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
                         <ul class="dropdown-menu menu">
@@ -35,14 +35,13 @@
                     </li>
                      {% if user.is_authenticated %}
                             <li><a href="{% url 'new_post' %}">Nuevo Post</a></li>
+                            <li><a href="{% url 'new_blog' %}">Nuevo Post</a></li>
                             <li><a href="{% url 'login' %}">Mis Blogs</a></li>
                             <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                             <li><a href="{% url 'login' %}">Login</a></li>
-                            <li><a href="#">Registro</a></li>
+                            <li><a href="{% url 'registro' %}">Registro</a></li>
                     {% endif %}
-
-
                 </ul>
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control input-busqueda" placeholder="Buscar...">

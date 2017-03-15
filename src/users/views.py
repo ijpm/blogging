@@ -1,8 +1,11 @@
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import CreateView
 
-from users.forms import LoginForm
+from users.forms import LoginForm, UserCreationForm
 
 
 class LoginView(View):
@@ -42,6 +45,33 @@ class LoginView(View):
                 context["error"] = "Wrong username or password"
         context["form"] = form
         return render(request, 'login.html', context)
+
+class RegisterView(View):
+
+    def get(self, request):
+        """
+        Presenta el formulario de login a un usuario
+        :param request: HttpRequest
+        :return: HttpResponse
+        """
+        context = {
+            'form': UserCreationForm()
+        }
+
+        return render(request, 'register.html', context)
+
+    def post(self, request):
+        """
+        Hace login de un usuario
+        :param request: HttpRequest
+        :return: HttpResponse
+        """
+        form = UserCreationForm(request.POST)
+        context = dict()
+        if form.is_valid():
+            user = form.save()
+
+        return redirect('login')
 
 def logout(request):
     """

@@ -1,26 +1,19 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
-{% block metas %}
-{{ block.super }}
-<title>Fistrium - New Post</title>
-{% endblock %}
-
 {% block content %}
 <main>
     <div class="container" style="padding-top:50px">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-12">
-                <h2>New post</h2>
-                {% autoescape off %}
-                    <div>{{ msg }}</div>
-                {% endautoescape %}
-                <form method="post" novalidate>
+               <h2>Registro</h2>
+                <div style="color:red">{{error}}</div>
+                <form  method="post" novalidate>
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     {% buttons %}
                         <button type="submit" class="btn btn-primary">
-                            Guardar Post
+                            Registro
                         </button>
                     {% endbuttons %}
                 </form>

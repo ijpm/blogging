@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block metas %}
 {{ block.super }}
 <title>Fistrium - Post detail</title>
@@ -10,17 +10,52 @@
     <div class="container" style="padding-top:50px">
         <!-- Example row of columns -->
         <div class="row">
-            <div class="col-md-12">
-                titulo: {{post.titulo}}
-                <br>
-                fecha de publicacion {{ post.publish_at }}
-                <br>
-                descripcion: {{ post.introduccion }}
-                <br>
-                cuerpo {{ post.cuerpo }}
-                <br>
+            <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="panel articulo">
+                    <div >
+                        <a href="./detalle.html">
+                            <img class="img-responsive imagen-articulo" src="{% static 'dist/img/ds-1140px.png' %}"  />
+                        </a>
+                    </div>
+                    <div class="panel-header">
+                        <span><a href="./detalle.html">{{post.titulo}}</a></span>
+                    </div>
+                    <div class="panel-body detalle">
+                        <div class="cuerpo">{{ post.cuerpo }}</div>
+                        <div class="comentarios" id="comentarios">
+                            <h2 id="inview-example">Comentarios</h2>
+                            <div id="comentarios-cont" class="">
+                                <div class="loader"></div>
+                                <div class="nocomments">No hay comentarios</div>
+                                <div class="errorcomments">Ocurrió un error al obtener los comentarios</div>
+                            </div>
+                            <div id="comentarios-form">
+                                <h3>Enviar Comentario</h3>
+                                <form class="new-comment-form" novalidate >
+                                  <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="email" class="form-control" id="nombre" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="apellidos">Apellidos</label>
+                                    <input type="text" class="form-control" id="apellidos" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="comentario">Comentario</label>
+                                    <textarea class="form-control" rows="3" id="comentario" required></textarea>
+                                  </div>
+                                  <button type="submit" class="btn btn-comment">Enviar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </div> <!-- /container -->
 </main>
 {% endblock %}
