@@ -12,11 +12,15 @@
         <div class="row">
             <div class="col-md-12">
                <h1>listado de blogs de la plataforma</h1>
+                {% if blog_objects %}
                 <ul>
                     {% for blog in blog_objects %}
                     <li>{{ blog.name }}</li>
                     {% endfor %}
                 </ul>
+                {% else %}
+                <h3>No existe ningún blog aún</h3>
+                {% endif %}
             </div>
         </div>
     </div>

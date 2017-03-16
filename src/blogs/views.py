@@ -134,6 +134,8 @@ class NewBlogView(View):
 
             #generar mensaje de exito
             msg = "Blog creado con éxito"
+            # limpiamos el formulario creando uno vacío para pasar a la plantilla
+            form = BlogForm()
         else:
             msg = "Ha ocurrido un error al guardar el blog" \
 
@@ -157,9 +159,8 @@ class PostListView(View):
         :return: HttpResponse
         """
 
-
         # recupera posts
-        posts = Post.objects.filter(owner=request.user.owned_blogs)
+        posts = Post.objects.filter(owner__in=request.user.owned_blogs.all())
 
         # prepara el contexto de la plantilla
         context = {
@@ -168,6 +169,27 @@ class PostListView(View):
 
         # renderiza y devuelve la plantilla
         return render(request, 'blogs/inicio.html', context)
+
+class BlogListView(View):
+
+    @method_decorator(login_required)
+    def get(self, request):
+        """
+        Sireve el formulario de crear post al usuario
+        :param request: HttpRequest
+        :return: HttpResponse
+        """
+
+        # recupera blogs
+        blogs = Blog.objects.filter(owner=request.user)
+
+        # prepara el contexto de la plantilla
+        context = {
+            'blog_objects': blogs
+        }
+
+        # renderiza y devuelve la plantilla
+        return render(request, 'blogs/blogs.html', context)
 
 def post_detail(request, post_pk):
     """

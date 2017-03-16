@@ -49,10 +49,9 @@ class Post(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     publish_at = models.DateTimeField(blank=True, null=True)
     state = models.CharField(max_length=3, default=NOPUBLICADO, choices=ESTADOS)
-    modified_at = models.DateTimeField(auto_now=True)
     url = models.CharField(max_length=100,blank=True, null=True)
     owner = models.ForeignKey(Blog, related_name="owned_posts")
-    categoria = models.ForeignKey(Categoria, related_name="owned_posts_category")
+    categoria = models.ManyToManyField(Categoria)
     # categorías en las que se publican (un post puede publicarse en una o varias categorías).
     # Las categorías deben poder ser gestionadas desde el administrador.
 

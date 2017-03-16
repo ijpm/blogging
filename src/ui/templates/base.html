@@ -22,7 +22,6 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav menu">
-                    <li class="active2"><a href="{% url 'home' %}">Inicio</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
                         <ul class="dropdown-menu menu">
@@ -33,11 +32,18 @@
                             <li><a href="#">Categoria 5</a></li>
                         </ul>
                     </li>
+                    <li><a href="{% url 'blogs_list' %}">Blogs</a></li>
                      {% if user.is_authenticated %}
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> <span class="caret"></span></a>
+                        <ul class="dropdown-menu menu">
                             <li><a href="{% url 'new_post' %}">Nuevo Post</a></li>
-                            <li><a href="{% url 'new_blog' %}">Nuevo Post</a></li>
-                            <li><a href="{% url 'login' %}">Mis Blogs</a></li>
+                            <li><a href="{% url 'new_blog' %}">Nuevo Blog</a></li>
+                            <li><a href="{% url 'mis_blogs' %}">Mis Blogs</a></li>
+                            <li><a href="{% url 'mis_posts' %}">Mis Posts</a></li>
                             <li><a href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
                         {% else %}
                             <li><a href="{% url 'login' %}">Login</a></li>
                             <li><a href="{% url 'registro' %}">Registro</a></li>
@@ -49,6 +55,7 @@
                         <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                     </div>
                 </form>
+
             </div><!--/.nav-collapse -->
         </div>
     </nav>
