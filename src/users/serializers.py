@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-
-class UserSerializer(serializers.Serializer):
+class UserListSerializer(serializers.Serializer):
 
     id = serializers.ReadOnlyField()
     username = serializers.CharField()
+
+class UserSerializer(UserListSerializer):
+
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     email = serializers.EmailField()

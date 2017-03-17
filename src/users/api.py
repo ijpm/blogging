@@ -6,14 +6,16 @@ from django.contrib.auth.models import User
 
 from django.http import HttpResponse
 from rest_framework import status
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import get_object_or_404, GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer, UserListSerializer
 
 
-class UsersAPI(APIView):
+class UsersAPI(GenericAPIView):
+    serializer_class = UserListSerializer
+    queryset = User.objects.all()
 
     def get(self, request):
         """
@@ -21,9 +23,10 @@ class UsersAPI(APIView):
         :param request:
         :return:
         """
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+        users = User.objects.all().values("id","username")
+        page = self.paginate_queryset(users)
+        serializer = UserListSerializer(page, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request):
         """
