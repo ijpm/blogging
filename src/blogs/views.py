@@ -8,7 +8,7 @@ from django.views.generic.list import ListView
 from django.utils import timezone
 
 from blogs.forms import PostForm, BlogForm
-from blogs.models import Blog, Post
+from blogs.models import Blog, Post, Categoria
 
 
 def posts_list(request):
@@ -20,10 +20,12 @@ def posts_list(request):
 
     # recupera posts
     posts = Post.objects.select_related("owner").all()
+    categorias = Categoria.objects.all()
 
     # prepara el contexto de la plantilla
     context = {
-        'post_objects': posts
+        'post_objects': posts,
+        'categoria_objects': categorias
     }
 
     # renderiza y devuelve la plantilla
@@ -84,6 +86,7 @@ class NewPostView(View):
 
             #generar mensaje de exito
             msg = "Post creado con éxito"
+            form = PostForm()
         else:
             msg = "Ha ocurrido un error al guardar el post" \
 
@@ -125,8 +128,9 @@ class NewBlogView(View):
         :param request: HttpRequest
         :return: HttpResponse        """
 
-        # crear el formulario con los datos del post
-        form = BlogForm(request.POST)
+        # crear el formulario con los datos del POST
+        blog_with_user = Blog(owner=request.user)
+        form = BlogForm(request.POST, instance=blog_with_user)
 
         if form.is_valid():
             #crea el post
@@ -185,7 +189,8 @@ class BlogListView(View):
 
         # prepara el contexto de la plantilla
         context = {
-            'blog_objects': blogs
+            'blog_objects': blogs,
+        'pon_nombre': 'ponloponlo'
         }
 
         # renderiza y devuelve la plantilla

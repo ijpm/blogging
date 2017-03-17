@@ -11,7 +11,13 @@
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-12">
-               <h1>listado de blogs de la plataforma</h1>
+               <h1>listado de blogs de
+               {% if pon_nombre %}
+               {{ user.username }}
+               {% else %}
+               la plataforma
+               {% endif %}
+               </h1>
                 {% if blog_objects %}
                 <ul>
                     {% for blog in blog_objects %}

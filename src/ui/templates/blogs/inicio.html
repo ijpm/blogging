@@ -6,43 +6,13 @@
 {% endblock %}
 
 {% block content %}
+
 <main>
     <div class="container" style="padding-top:50px">
         <!-- Example row of columns -->
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 ">
-                <div class="panel articulo">
-                    <div class="panel-image embed-responsive ">
-                        <video class="embed-responsive-item" controls>
-                            <source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            <source src="http://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
-                            Your browser does not support HTML5 video.
-                        </video>
-                    </div>
-                    <div class="panel-autor">
-                        <img class="img-responsive" src="{% static 'dist/img/no-user-30px.png' %}">
-                        <div>
-                            Manolito
-                        </div>
-                        <div class="">
-
-                        </div>
-                    </div>
-                    <div class="panel-header">
-                        <span><a href="#">Heading Heading Heading</a></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo...</p>
-                        <p><a href="#">Leer más...</a></p>
-                        <div class="comment-like-box">
-                            <a href="#" class="pull-left">Ver comentarios (10)</a>
-                            <span class="pull-right comment-like" data-nombre="dos"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
             {% for post in post_objects %}
-            <div class="col-lg-3 col-md-4 col-sm-6 ">
+            <div class="col-md-4 col-sm-6 ">
                 <div class="panel articulo">
                     <div class="panel-image">
                         <a href="{% url 'post_detail' post.pk %}">
