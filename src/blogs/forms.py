@@ -10,6 +10,7 @@ class PostForm(forms.ModelForm):
         fields = ["titulo", "introduccion", "cuerpo", "publish_at", "url", "owner", "categorias"]
 
 class BlogForm(forms.ModelForm):
+
     class Meta:
         model = Blog
         fields = ["name", "description", "tematica"]

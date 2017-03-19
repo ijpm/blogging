@@ -14,14 +14,29 @@
                 <div class="panel articulo">
                     <div >
                         <a href="./detalle.html">
-                            <img class="img-responsive imagen-articulo" src="{% static 'dist/img/ds-1140px.png' %}"  />
+                             {% if post.url == '' %}
+                                  <img class="img-responsive imagen-articulo" src="{% static 'dist/img/ds-1140px.png' %}"  />
+                            {% else %}
+                                 <img class="img-responsive imagen-articulo" src="{{ post.url }}"  />
+                            {% endif %}
                         </a>
                     </div>
                     <div class="panel-header">
                         <span><a href="./detalle.html">{{post.titulo}}</a></span>
+
                     </div>
                     <div class="panel-body detalle">
-                        <div class="cuerpo">{{ post.cuerpo }}</div>
+                        <div class="">
+                            {{ post.created_at }}
+                        </div>
+                         <div class="cuerpo">
+                             <h3>Introducción</h3>
+                             {{ post.introduccion }}
+                         </div>
+                        <div class="cuerpo">
+                            <h3>Cuerpo</h3>
+                            {{ post.cuerpo }}
+                        </div>
                         <div class="comentarios" id="comentarios">
                             <h2 id="inview-example">Comentarios</h2>
                             <div id="comentarios-cont" class="">

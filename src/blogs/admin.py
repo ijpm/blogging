@@ -26,4 +26,5 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'owner', 'created_at')
+    list_display = ('titulo' , 'owner')
+    list_filter = ('owner', 'categorias')

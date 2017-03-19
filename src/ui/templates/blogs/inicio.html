@@ -15,8 +15,12 @@
             <div class="col-md-4 col-sm-6 ">
                 <div class="panel articulo">
                     <div class="panel-image">
-                        <a href="{% url 'post_detail' post.pk %}">
-                            <img class="img-responsive imagen-articulo" src="{% static 'dist/img/ds-1140px.png' %}" srcset="{% static 'dist/img/ds-384px.png' %} 1140w, {% static 'dist/img/ds-940px.png' %} 940w, {% static 'dist/img/ds-720px.png' %} 720w, {% static 'dist/img/ds-384px.png' %} 384w" />
+                        <a href="/blogs/{{ post.owner|slugify }}/{{ post.pk }}">
+                            {% if post.url == '' %}
+                                  <img class="img-responsive imagen-articulo" src="{% static 'dist/img/ds-1140px.png' %}" srcset="{% static 'dist/img/ds-384px.png' %} 1140w, {% static 'dist/img/ds-940px.png' %} 940w, {% static 'dist/img/ds-720px.png' %} 720w, {% static 'dist/img/ds-384px.png' %} 384w" />
+                            {% else %}
+                                 <img class="img-responsive imagen-articulo" src="{{ post.url }}"  />
+                            {% endif %}
                         </a>
                     </div>
                     <div class="panel-autor">
@@ -29,11 +33,11 @@
                         </div>
                     </div>
                     <div class="panel-header">
-                        <span><a href="{% url 'post_detail' post.pk %}">{{ post.titulo }}</a></span>
+                        <span><a href="/blogs/{{ post.owner|slugify }}/{{ post.pk }}">{{ post.titulo }}</a></span>
                     </div>
                     <div class="panel-body">
                         {{ post.introduccion }}
-                        <p><a href="{% url 'post_detail' post.pk %}">Leer más...</a></p>
+                        <p><a href="/blogs/{{ post.owner|slugify }}/{{ post.pk }}">Leer más...</a></p>
                         <div class="comment-like-box">
                             <a href="#" class="pull-left">Ver comentarios (10)</a>
                             <span class="pull-right comment-like" data-nombre="dos"><i class="fa fa-heart-o" aria-hidden="true"></i></span>

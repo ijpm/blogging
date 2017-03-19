@@ -39,7 +39,7 @@ def blogs_list(request):
     """
 
     # recupera blogs
-    blogs = Blog.objects.select_related("owner").all()
+    blogs = Blog.objects.order_by('-created_at').select_related("owner").all()
 
     # prepara el contexto de la plantilla
     context = {
@@ -138,6 +138,7 @@ class NewBlogView(View):
 
             #generar mensaje de exito
             msg = "Blog creado con éxito"
+
             # limpiamos el formulario creando uno vacío para pasar a la plantilla
             form = BlogForm()
         else:
@@ -190,13 +191,13 @@ class BlogListView(View):
         # prepara el contexto de la plantilla
         context = {
             'blog_objects': blogs,
-        'pon_nombre': 'ponloponlo'
+            'pon_nombre': 'ponloponlo'
         }
 
         # renderiza y devuelve la plantilla
         return render(request, 'blogs/blogs.html', context)
 
-def post_detail(request, post_pk):
+def post_detail(request, post_pk, blog_name):
     """
        Recupera una tarea de la base de datos y la pinta con una plantilla
        :param request: HttpRequest
@@ -219,3 +220,22 @@ def post_detail(request, post_pk):
     # renderizar la plantilla
 
     return render(request, 'blogs/post-detail.html', context)
+
+def post_detail_blog(request, blog_pk):
+    """
+       Recupera una tarea de la base de datos y la pinta con una plantilla
+       :param request: HttpRequest
+       :param post_pk: Primary key del post a recuperar
+       :return: HttpResponse
+       """
+    # recuperar el post
+    # recupera posts
+    posts = Post.objects.order_by('-created_at').filter(owner=blog_pk)
+
+    # prepara el contexto de la plantilla
+    context = {
+        'post_objects': posts
+    }
+
+    # renderiza y devuelve la plantilla
+    return render(request, 'blogs/inicio.html', context)

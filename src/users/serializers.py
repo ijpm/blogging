@@ -3,12 +3,14 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-class UserListSerializer(serializers.Serializer):
+
+class UsersListSerializer(serializers.Serializer):
 
     id = serializers.ReadOnlyField()
     username = serializers.CharField()
 
-class UserSerializer(UserListSerializer):
+
+class UserSerializer(UsersListSerializer):
 
     first_name = serializers.CharField()
     last_name = serializers.CharField()
@@ -22,19 +24,19 @@ class UserSerializer(UserListSerializer):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.username = validated_data.get('username', instance.username)
-        instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.email = validated_data.get('email', instance.email)
         if validated_data.get('password'):
-           instance.set_password(validated_data.get('password'))
+            instance.set_password(validated_data.get('password'))
         instance.save()
         return instance
 
     def validate(self, attrs):
+        # si estoy creando un usuario nuevo, comprobar si el username ya está usado
         if self.instance is None and User.objects.filter(username=attrs.get("username")).exists():
             raise ValidationError("Username already exists")
 
-        if self.instance is not None and self.instance.username != attrs.get("username") and User.objects.filter(
-                username=attrs.get("username")).exists():
+        # actualizo el usuario cambiando el username -> OK si nuevo username no está usado
+        if self.instance is not None and self.instance.username != attrs.get("username") and User.objects.filter(username=attrs.get("username")).exists():
             raise ValidationError("Username already exists")
 
         return attrs
