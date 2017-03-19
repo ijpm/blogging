@@ -28,3 +28,10 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'titulo', 'owner', 'categorias')
+
+class BlogPostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = ('titulo', 'introduccion', 'publish_at', 'url')
+
