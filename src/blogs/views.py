@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponse, request
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.utils.timezone import now
+from django.db.models import Q, Count
 
 from django.views.generic.list import ListView
 from django.utils import timezone
@@ -19,7 +23,7 @@ def posts_list(request):
     """
 
     # recupera posts
-    posts = Post.objects.select_related("owner").all()
+    posts = Post.objects.select_related("owner").filter(Q(publish_at__lte=now())).all()
     categorias = Categoria.objects.all()
 
     # prepara el contexto de la plantilla
